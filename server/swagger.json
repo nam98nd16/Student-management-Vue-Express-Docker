@@ -1,0 +1,424 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Student manangement APIs",
+      "description": "Lists of all APIs used in the application",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api-docs",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      },
+      {
+        "name": "Auth",
+        "description": "API for authentication-related stuffs"
+      },
+      {
+        "name": "Classes",
+        "description": "API for classes management"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      },
+      "/register": {
+        "post": {
+            "tags": [
+                "Auth"
+            ],
+            "summary": "Register new users (2 fields in body: username and password)",
+            "description": "Create new user in system",
+            "parameters": [
+                {
+                  "username": "username",
+                  "in": "path",
+                  "required": true,
+                  "description": "each user has a unique username",
+                  "type": "string"
+                },
+                {
+                    "password": "password",
+                    "in": "path",
+                    "required": true,
+                    "description": "each user has his own password",
+                    "type": "string"
+                  }
+              ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully signed up!",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+            "tags": [
+                "Auth"
+            ],
+            "summary": "Login (2 fields in body: username and password)",
+          "description": "Login",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Login",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return token.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/logout": {
+        "get": {
+            "tags": [
+                "Auth"
+            ],
+            "summary": "Logout",
+          "description": "Logout",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Logout",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully logged out!",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/classes": {
+        "get": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Get all classes information",
+          "description": "Get all classes information",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Get all classes information",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return all classes information",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        },
+        "post": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Create a new class (1 field in body: name)",
+          "description": "Create a new class",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Create a new class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully created a new class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Delete a class (1 field in body: name)",
+          "description": "Delete a class",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Delete a class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully deleted a class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        }
+      },
+      "/classes/students": {
+        "post": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Add a student to a class (2 fields in body: classID and userID)",
+          "description": "Add a student to a class",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Add a student to a class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return information!",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        },
+        "delete": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Remove a student from a class (2 fields in body: classID and userID)",
+          "description": "Remove a student from a class",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Remove a student from a class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return information!",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        }
+      },
+      "/classes/{classID}": {
+        "get": {
+            "tags": [
+                "Classes"
+            ],
+            "summary": "Get all students in a class",
+          "description": "Get all students in a class",
+          "parameters": [
+            {
+              "in": "body",
+              "description": "Get all students in a class",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Return an array of students in a class.",
+              "schema": {
+                "$ref": "#/definitions/Class"
+              }
+            }
+          }
+        }
+      },
+      "/users/{userId}": {
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete user with given ID",
+          "tags": [
+            "Users"
+          ],
+          "responses": {
+            "200": {
+              "description": "User is deleted",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user with given ID (field currently not allowed to update: password)",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User is updated",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string"
+          },
+          "class": {
+            "type": "ObjectID"
+          },
+          "role": {
+            "type": "string",
+            "default": "student"
+          }
+        }
+      },
+      "Class": {
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "created": {
+            "type": "date"
+          },
+          "students": {
+            "type": "array"
+          },
+          "update": {
+              "type": "date"
+          }
+        }
+      }
+    }
+  }
