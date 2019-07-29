@@ -5,7 +5,7 @@
               <h3>Class ID: {{this.userProfile.class}}</h3>
               <hr>
           </div>
-          <div v-for="message in messages" class="p-containter">
+          <div v-for="message in this.groupMessages" class="p-containter">
                 <!--<p><span style="font-weight: bold">Message:</span> {{ message.message }}, <span style="font-weight: bold">sent by:</span> <span style="font-style: italic">{{ message.user.username }}</span></p>-->
                 <p><span style="font-weight: bold">{{message.user.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
         </div>
@@ -36,7 +36,7 @@
             }
         },
         computed: {
-            ...mapState(['userProfile'])
+            ...mapState(['userProfile', 'groupMessages'])
         },
         methods: {
             sendMessage() {
@@ -54,7 +54,7 @@
         },
         mounted() {
             this.socket.on('MESSAGE', (data) => {
-                this.messages.push(data)
+                this.$store.commit('pushMessage', data)
             })
         },
         filters: {

@@ -5,9 +5,9 @@ import firebase from 'firebase'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import Settings from '@/components/Settings'
-import TestApi from '../services/TestApi'
-import Test from '@/components/Test'
-import AuthApi from '../services/AuthApi'
+//import TestApi from '../services/TestApi'
+//import Test from '@/components/Test'
+//import AuthApi from '../services/AuthApi'
 import Chat from '@/components/Chat'
 import PrivateMessage from '@/components/PrivateMessage'
 
@@ -40,11 +40,6 @@ const router = new Router({
             meta: {
                 requiresAuth: true
             }
-        },
-        {
-            path: '/test',
-            name: 'Test',
-            component: Test
         },
         {
             path: '/chat',

@@ -19,7 +19,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://server-database:27017/my_db', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/my_db', {useNewUrlParser: true})
   .then(() => console.log('Successfully connected to my_db'))
   .catch((err) => console.error(err));
 var app = express();

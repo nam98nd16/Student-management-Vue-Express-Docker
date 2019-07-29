@@ -27,7 +27,7 @@ fb.auth.onAuthStateChanged(user => {
     }
 })
 
-import AuthApi from '@/services/AuthApi'
+//import AuthApi from '@/services/AuthApi'
 import axios from 'axios'
 const api = axios.create({
     baseURL: 'http://localhost:3000'
@@ -39,13 +39,15 @@ export const store = new Vuex.Store({
     state: {
         currentUser: null,
         userProfile: {},
-        classes: []
+        classes: [],
+        groupMessages: []
     },
     actions: {
         clearData({ commit }) {
             commit('setCurrentUser', null)
             commit('setUserProfile', null)
             commit('setClasses', null)
+            commit('setMessages', null)
         },
         fetchUserProfile({ commit, state}) {
             api.get('users/' + state.currentUser._id, { 'headers': { 'Authorization': Vue.cookie.get('token')}}).then(res => {
@@ -82,6 +84,12 @@ export const store = new Vuex.Store({
             }else {
                 state.classes = []
             }
+        },
+        pushMessage(state, val) {
+            state.groupMessages.push(val)
+        },
+        setMessages(state, val) {
+            state.groupMessages = val
         }
     }
 })

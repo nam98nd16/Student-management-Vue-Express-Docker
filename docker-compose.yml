@@ -5,8 +5,8 @@ services:
     build: ./client
     ports:
       - 8080:8080
-    volumes:
-      - ./client:/data
+    #volumes:
+    #  - ./client:/data
     environment:
       - API_URL=http://localhost:3000/
 
@@ -15,9 +15,9 @@ services:
     ports:
       - 3000:3000
       - 3001:3001
-    volumes:
-      - ./server:/data
-    depends_on: 
+    #volumes:
+    #  - ./server:/data
+    depends_on:
       - server-database
     environment:
       - DATABASE_URL=server-database
