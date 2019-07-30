@@ -2,15 +2,15 @@
   <div id="dashboard">
       <div class="card-body">
           <div class="card-title">
-              <h5>Welcome to private message, {{this.userProfile.username}}!</h5>
+              <h5>Welcome to private message, {{userProfile.username}}!</h5>
               <hr>
           </div>
 
 
         <div class="all-users">
-            <a @click="viewAllStudentsWithAPI">All users</a>
+            <a @click="viewAllStudentsWithAPI">Fetch all users (except yourself)</a>
             <div v-for="user in allUsers" :key="user._id" class="user">
-                <a @click="openUserModal(user.username)">{{user.username}}</a>
+                <a  v-if="user.username != userProfile.username" @click="openUserModal(user.username)">{{user.username}}</a>
             </div>
         </div>
 
@@ -21,9 +21,9 @@
                 <div class="p-container">
                     <a @click="closeUserModal" class="close">X</a>
                     <h5>Private messages between {{userProfile.username}} and {{username}}</h5>
-                    <div v-for="message in messages" class="comments">
+                    <div v-for="message in this.privateMessages" class="comments">
                         <!--<p><span style="font-weight: bold">Message:</span> {{ message.message }}, <span style="font-weight: bold">sent by:</span> <span style="font-style: italic">{{ message.user.username }}</span></p>-->
-                        <p v-if="username == message.sender.username || userProfile.username == message.sender.username"><span style="font-weight: bold">{{message.sender.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
+                        <p v-if="username == message.sender.username || username == message.receiver"><span style="font-weight: bold">{{message.sender.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
                     </div>
                     <form @submit.prevent="sendPrivateMessage(username)">
                         <div class="form-group pb-3">
@@ -65,7 +65,7 @@
             }
         },
         computed: {
-            ...mapState(['userProfile'])
+            ...mapState(['userProfile', 'privateMessages'])
         },
         created () {
             this.socket.emit('join', {username: this.userProfile.username})
@@ -93,13 +93,13 @@
             },
             closeUserModal() {
                 this.showUserModal = false
-                this.messages = []
+                //this.messages = []
             }
         },
         mounted() {
             this.socket.on('new private message', (data) => {
                 this.receiver = data.sender.username
-                this.messages.push(data)
+                this.$store.commit('pushPrivateMessage', data)
                 //console.log(this.items[2][1])
             })
         }

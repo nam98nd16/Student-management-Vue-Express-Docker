@@ -40,7 +40,8 @@ export const store = new Vuex.Store({
         currentUser: null,
         userProfile: {},
         classes: [],
-        groupMessages: []
+        groupMessages: [],
+        privateMessages: []
     },
     actions: {
         clearData({ commit }) {
@@ -86,10 +87,22 @@ export const store = new Vuex.Store({
             }
         },
         pushMessage(state, val) {
-            state.groupMessages.push(val)
+            if (val){
+                state.groupMessages.push(val)
+            }else {
+                state.groupMessages = []
+            }
         },
         setMessages(state, val) {
             state.groupMessages = val
+            state.privateMessages = val
+        },
+        pushPrivateMessage(state, val) {
+            if (val) {
+                state.privateMessages.push(val)
+            } else {
+                state.privateMessages = []
+            }
         }
     }
 })

@@ -2,10 +2,10 @@
   <div class="card mt-3">
       <div class="card-body">
           <div class="card-title">
-              <h3>Class ID: {{this.userProfile.class}}</h3>
+              <h3>Class ID: {{userProfile.class}}</h3>
               <hr>
           </div>
-          <div v-for="message in this.groupMessages" class="p-containter">
+          <div v-for="message in groupMessages" class="p-containter">
                 <!--<p><span style="font-weight: bold">Message:</span> {{ message.message }}, <span style="font-weight: bold">sent by:</span> <span style="font-style: italic">{{ message.user.username }}</span></p>-->
                 <p><span style="font-weight: bold">{{message.user.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
         </div>
