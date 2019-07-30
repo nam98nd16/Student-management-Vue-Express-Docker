@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -87,10 +88,11 @@ export const store = new Vuex.Store({
             }
         },
         pushMessage(state, val) {
-            if (val){
+            if (state.groupMessages){
                 state.groupMessages.push(val)
             }else {
                 state.groupMessages = []
+                state.groupMessages.push(val)
             }
         },
         setMessages(state, val) {
@@ -98,11 +100,13 @@ export const store = new Vuex.Store({
             state.privateMessages = val
         },
         pushPrivateMessage(state, val) {
-            if (val) {
+            if (state.privateMessages) {
                 state.privateMessages.push(val)
             } else {
                 state.privateMessages = []
+                state.privateMessages.push(val)
             }
         }
-    }
+    },
+    plugins: [createPersistedState()]
 })
