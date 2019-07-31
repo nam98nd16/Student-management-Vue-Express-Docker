@@ -7,7 +7,7 @@
           </div>
           <div v-for="message in groupMessages" class="p-containter">
                 <!--<p><span style="font-weight: bold">Message:</span> {{ message.message }}, <span style="font-weight: bold">sent by:</span> <span style="font-style: italic">{{ message.user.username }}</span></p>-->
-                <p><span style="font-weight: bold">{{message.user.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
+                <p v-if="userProfile.class == message.user.class"><span style="font-weight: bold">{{message.user.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
         </div>
       </div>
       <hr>
