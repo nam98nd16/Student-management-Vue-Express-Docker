@@ -49,7 +49,7 @@ export const store = new Vuex.Store({
             commit('setCurrentUser', null)
             commit('setUserProfile', null)
             commit('setClasses', null)
-            commit('setMessages', null)
+            //commit('setMessages', null)
         },
         fetchUserProfile({ commit, state}) {
             api.get('users/' + state.currentUser._id, { 'headers': { 'Authorization': Vue.cookie.get('token')}}).then(res => {

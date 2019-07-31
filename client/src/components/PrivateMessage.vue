@@ -23,7 +23,7 @@
                     <h5>Private messages between {{userProfile.username}} and {{username}}</h5>
                     <div v-for="message in this.privateMessages" class="comments">
                         <!--<p><span style="font-weight: bold">Message:</span> {{ message.message }}, <span style="font-weight: bold">sent by:</span> <span style="font-style: italic">{{ message.user.username }}</span></p>-->
-                        <p v-if="username == message.sender.username || username == message.receiver"><span style="font-weight: bold">{{message.sender.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
+                        <p v-if="username == message.sender.username || (userProfile.username == message.sender.username && username == message.receiver)"><span style="font-weight: bold">{{message.sender.username}}</span>: <span style="word-wrap: break-word">{{message.message}}</span> <span style="font-style:italic;float:right">{{message.time}}</span></p>
                     </div>
                     <form @submit.prevent="sendPrivateMessage(username)">
                         <div class="form-group pb-3">
